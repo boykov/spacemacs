@@ -26,6 +26,7 @@
   (load-file (concat (file-name-directory load-file-name)
                      "core/core-load-paths.el"))
   (require 'core-spacemacs)
+  (setq dotspacemacs-filepath (concat user-emacs-directory ".spacemacs"))
   (spacemacs/init)
   (spacemacs/maybe-install-dotfile)
   (configuration-layer/sync)
