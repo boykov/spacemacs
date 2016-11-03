@@ -13,6 +13,8 @@
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     html
+     auto-completion
     eab-spacemacs
      ;; --------------------------------------------------------
      ;; Example of useful layers you may want to use right away
