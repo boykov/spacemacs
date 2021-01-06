@@ -23,6 +23,8 @@
     (message (concat "Your version of Emacs (%s) is too old. "
                      "Spacemacs requires Emacs version %s or above.")
              emacs-version spacemacs-emacs-min-version)
+  (or (fboundp 'insert-string) (defalias 'insert-string 'insert))
+  (setq browse-url-mosaic-program nil)
   (load-file (concat (file-name-directory load-file-name)
                      "core/core-load-paths.el"))
   (require 'core-spacemacs)
