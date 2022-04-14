@@ -57,3 +57,11 @@ history2/
 historyP/
 historyM/
 historyN/
+historyC/
+
+.stignore
+eln-cache/
+forge-database.sqlite*
+transient/
+recentf~
+custom.el
