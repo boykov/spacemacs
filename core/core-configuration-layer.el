@@ -105,7 +105,7 @@ ROOT is returned."
                                    "(Takes precedence over `:disabled-for'.)")))
   "A configuration layer.")
 
-(defmethod cfgl-layer-owned-packages ((layer cfgl-layer))
+(cl-defmethod cfgl-layer-owned-packages ((layer cfgl-layer))
   "Return the list of owned packages by LAYER.
 LAYER has to be installed for this method to work properly."
   (delq nil (mapcar
@@ -116,11 +116,11 @@ LAYER has to be installed for this method to work properly."
                    pkg)))
              (oref layer :packages))))
 
-(defmethod cfgl-layer-owned-packages ((layer nil))
+(cl-defmethod cfgl-layer-owned-packages ((layer null))
   "Accept nil as argument and return nil."
   nil)
 
-(defmethod cfgl-layer-get-packages ((layer cfgl-layer))
+(cl-defmethod cfgl-layer-get-packages ((layer cfgl-layer))
   "Return the list of packages for LAYER."
   (if (eq 'all (oref layer :selected-packages))
       (oref layer :packages)
@@ -182,13 +182,13 @@ LAYER has to be installed for this method to work properly."
              :documentation
              "If non-nil this package is excluded from all layers.")))
 
-(defmethod cfgl-package-enabledp ((pkg cfgl-package) &optional inhibit-messages)
+(cl-defmethod cfgl-package-enabledp ((pkg cfgl-package) &optional inhibit-messages)
   "Evaluate the `toggle' slot of passed PKG."
   (let ((message-log-max (unless inhibit-messages message-log-max))
         (toggle (oref pkg :toggle)))
     (eval toggle)))
 
-(defmethod cfgl-package-get-safe-owner ((pkg cfgl-package))
+(cl-defmethod cfgl-package-get-safe-owner ((pkg cfgl-package))
   "Safe method to return the name of the layer which owns PKG."
   ;; The owner of a package is the first *used* layer in `:owners' slot.
   ;; Note: for packages in `configuration-layer--used-packages' the owner is
@@ -200,7 +200,7 @@ LAYER has to be installed for this method to work properly."
     (when (configuration-layer/layer-usedp (car layers))
       (car layers))))
 
-(defmethod cfgl-package-set-property ((pkg cfgl-package) slot value)
+(cl-defmethod cfgl-package-set-property ((pkg cfgl-package) slot value)
   "Set SLOT to the given VALUE for the package PKG.
 If `configuration-layer--package-properties-read-onlyp' is non-nil then VALUE
 is not set for the given SLOT."
