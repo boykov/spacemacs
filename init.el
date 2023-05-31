@@ -23,6 +23,23 @@
 
 (load-file (concat eab-spacemacs-path "fix-esup.el"))
 
+(require 'package)
+(defun package--get-activatable-pkg (pkg-name)
+  ;; Is "activatable" a word?
+  (let ((pkg-descs (sort (cdr (assq pkg-name package-alist))
+                         (lambda (p1 p2)
+                           (let ((v1 (package-desc-version p1))
+                                 (v2 (package-desc-version p2)))
+                             (or
+                              (version-list-< v2 v1)))))))
+    ;; Check if PACKAGE is available in `package-alist'.
+    (while
+        (when pkg-descs
+          (let ((available-version (package-desc-version (car pkg-descs))))
+            (package-disabled-p pkg-name available-version)))
+      (setq pkg-descs (cdr pkg-descs)))
+    (car pkg-descs)))
+
 (if (not (version<= spacemacs-emacs-min-version emacs-version))
     (message (concat "Your version of Emacs (%s) is too old. "
                      "Spacemacs requires Emacs version %s or above.")
