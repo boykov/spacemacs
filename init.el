@@ -23,35 +23,6 @@
 
 (load-file (concat eab-spacemacs-path "fix-esup.el"))
 
-(require 'package)
-(defun package--get-activatable-pkg (pkg-name)
-  ;; Is "activatable" a word?
-  (let ((pkg-descs (cdr (assq pkg-name package-alist))))
-    ;; Check if PACKAGE is available in `package-alist'.
-    (while
-        (when pkg-descs
-          (let ((available-version (package-desc-version (car pkg-descs))))
-            (or (package-disabled-p pkg-name available-version)
-                ;; Prefer a builtin package.
-                (package-built-in-p pkg-name available-version))))
-      (setq pkg-descs (cdr pkg-descs)))
-    (car pkg-descs)))
-
-(defun package-load-all-descriptors ()
-  "Load descriptors for installed Emacs Lisp packages.
-This looks for package subdirectories in `package-user-dir' and
-`package-directory-list'.  The variable `package-load-list'
-controls which package subdirectories may be loaded.
-
-In each valid package subdirectory, this function loads the
-description file containing a call to `define-package', which
-updates `package-alist'."
-  (dolist (dir (cons package-user-dir package-directory-list))
-    (when (file-directory-p dir)
-      (dolist (pkg-dir (directory-files dir t "\\`[^.]"))
-        (when (file-directory-p pkg-dir)
-          (package-load-descriptor pkg-dir))))))
-
 (if (not (version<= spacemacs-emacs-min-version emacs-version))
     (message (concat "Your version of Emacs (%s) is too old. "
                      "Spacemacs requires Emacs version %s or above.")
