@@ -14,8 +14,7 @@
   "Define faces for micro-states."
   (let* ((hname 'spacemacs-micro-state-header-face)
          (bname 'spacemacs-micro-state-binding-face)
-         (box '(:line-width -1 :color (plist-get (face-attribute
-                                                  'mode-line :box) :color)))
+         (box '(:line-width -1))
          (err (face-attribute 'error :foreground)))
     (eval `(defface ,hname '((t ()))
              "Face for micro-state header in echo area.

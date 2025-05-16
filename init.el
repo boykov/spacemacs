@@ -22,6 +22,12 @@
 (defconst eab-spacemacs-path (concat user-emacs-directory "private/eab-spacemacs/"))
 
 (load-file (concat eab-spacemacs-path "fix-esup.el"))
+(add-to-list 'load-path (concat "/home/eab/.emacs.d/elpa/compat-28.1.2.2"))
+(if (string-match-p "^30" emacs-version)
+    (progn
+      (require 'compat-macs)
+      (require 'compat)
+      (require 'compat-27)))
 
 (if (not (version<= spacemacs-emacs-min-version emacs-version))
     (message (concat "Your version of Emacs (%s) is too old. "
