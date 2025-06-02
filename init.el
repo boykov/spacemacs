@@ -17,7 +17,6 @@
 (setq gc-cons-threshold 100000000)
 
 (defconst spacemacs-version          "0.200.4" "Spacemacs version.")
-(defconst spacemacs-emacs-min-version   "24.4" "Minimal version of Emacs.")
 
 (defconst eab-spacemacs-path (concat user-emacs-directory "private/eab-spacemacs/"))
 
@@ -29,20 +28,16 @@
       (require 'compat)
       (require 'compat-27)))
 
-(if (not (version<= spacemacs-emacs-min-version emacs-version))
-    (message (concat "Your version of Emacs (%s) is too old. "
-                     "Spacemacs requires Emacs version %s or above.")
-             emacs-version spacemacs-emacs-min-version)
-  (or (fboundp 'insert-string) (defalias 'insert-string 'insert))
-  (setq browse-url-mosaic-program nil)
-  (load-file (concat eab-spacemacs-path
-		     "local/spacemacs/core/core-load-paths.el"))
-  (require 'core-spacemacs)
-  (setq dotspacemacs-filepath (concat eab-spacemacs-path ".spacemacs"))
-  (spacemacs/init)
-  (spacemacs/maybe-install-dotfile)
-  (configuration-layer/sync)
-  (spacemacs-buffer/display-info-box)
-  (spacemacs/setup-startup-hook)
-  (require 'server)
-  (unless (server-running-p) (server-start)))
+(or (fboundp 'insert-string) (defalias 'insert-string 'insert))
+(setq browse-url-mosaic-program nil)
+(load-file (concat eab-spacemacs-path
+		   "local/spacemacs/core/core-load-paths.el"))
+(require 'core-spacemacs)
+(setq dotspacemacs-filepath (concat eab-spacemacs-path ".spacemacs"))
+(spacemacs/init)
+(spacemacs/maybe-install-dotfile)
+(configuration-layer/sync)
+(spacemacs-buffer/display-info-box)
+(spacemacs/setup-startup-hook)
+(require 'server)
+(unless (server-running-p) (server-start))
