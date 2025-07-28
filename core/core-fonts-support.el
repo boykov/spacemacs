@@ -11,9 +11,6 @@
 (require 'core-funcs)
 (require 'core-spacemacs-buffer)
 
-(defvar spacemacs--diminished-minor-modes nil
-  "List of diminished modes to unicode or ascii values.")
-
 (defun spacemacs/set-default-font (plists)
   "Set the font given the passed PLISTS.
 
@@ -96,19 +93,5 @@ The return value is nil if no font was found, truthy otherwise."
                              "instead (see Font section in "
                              "~/.emacs.d/doc/DOCUMENTATION.org for more "
                              "info).")))
-
-(defmacro spacemacs|diminish (mode &optional unicode ascii)
-  "Diminish MODE name in mode line to UNICODE or ASCII depending on the value
-`dotspacemacs-mode-line-unicode-symbols'.
-If ASCII is not provided then UNICODE is used instead. If neither are provided,
-the mode will not show in the mode line."
-  `(let ((cell (assq ',mode spacemacs--diminished-minor-modes)))
-     (if cell
-         (setcdr cell '(,unicode ,ascii))
-       (push '(,mode ,unicode ,ascii) spacemacs--diminished-minor-modes))))
-
-(defmacro spacemacs|hide-lighter (mode)
-  "Diminish MODE name in mode line to LIGHTER."
-  `(eval-after-load 'diminish '(diminish ',mode)))
 
 (provide 'core-fonts-support)

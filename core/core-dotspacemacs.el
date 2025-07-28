@@ -240,17 +240,6 @@ several times cycle between the kill ring content.'")
   'dotspacemacs-enable-paste-transient-state
   "Old name of `dotspacemacs-enable-paste-transient-state'.")
 
-(defvar dotspacemacs-which-key-delay 0.4
-  "Delay in seconds starting from the last keystroke after which
-the which-key buffer will be shown if you have not completed a
-key sequence. Setting this variable is equivalent to setting
-`which-key-idle-delay'.")
-
-(defvar dotspacemacs-which-key-position 'bottom
-  "Location of the which-key popup buffer. Possible choices are bottom,
-right, and right-then-bottom. The last one will display on the
-right if possible and fallback to bottom if not.")
-
 (defvar dotspacemacs-loading-progress-bar t
   "If non nil a progress bar is displayed when spacemacs is loading. This
 may increase the boot time on some systems and emacs builds, set it to nil

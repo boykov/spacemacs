@@ -123,15 +123,6 @@ Example: (evil-map visual \"<\" \"<gv\")"
                    (execute-kbd-macro ,(substring seq 1)))
               (execute-kbd-macro ,seq)))))))
 
-(defun spacemacs/diminish-hook (_)
-  "Display diminished lighter in vanilla Emacs mode-line."
-  (let ((unicodep (dotspacemacs|symbol-value
-                   dotspacemacs-mode-line-unicode-symbols)))
-    (cl-loop for (mode uni nouni) in spacemacs--diminished-minor-modes
-             do (diminish mode (if unicodep uni nouni)))))
-
-
-
 (defun spacemacs//hydra-key-doc-function (key key-width doc doc-width)
   "Custom hint documentation format for keys."
   (format (format "[%%%ds] %%%ds" key-width (- -1 doc-width))
