@@ -208,7 +208,7 @@ is not set for the given SLOT."
     (eval `(oset pkg ,slot value))))
 
 (defvar configuration-layer--elpa-archives
-  '(("melpa" . "melpa.org/packages/")
+  '(
     ("org"   . "orgmode.org/elpa/")
     ("gnu"   . "elpa.gnu.org/packages/"))
   "List of ELPA archives required by Spacemacs.")
